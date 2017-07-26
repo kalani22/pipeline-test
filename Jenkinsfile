@@ -10,11 +10,13 @@ pipeline {
       steps {
         parallel(
           "UPD1": {
-            node(label: 'slave_02') {              
-              ws('D:\\ifs\\UPD_IT\\scripts') {
-                echo 'echo UPD1'
-                bat 'call CloneDatabase\\Clonedatabase.cmd 1'
-                echo 'echo Database Cloned.'
+            node(label: 'slave_02') {
+              withEnv(['DB_SID=D1467']) {
+                ws('D:\\ifs\\UPD_IT\\scripts') {
+                  echo 'echo UPD1'
+                  bat 'call CloneDatabase\\testVariables.cmd'
+                  echo 'echo Database Cloned.'
+                }
               }
             }
             
